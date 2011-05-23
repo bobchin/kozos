@@ -56,4 +56,6 @@ write :		$(TARGET).mot
 clean :
 		rm -f $(OBJS) $(TARGET) $(TARGET).elf $(TARGET).mot
 
+term :
+		screen /dev/cu.usbserial-000013FA
 
