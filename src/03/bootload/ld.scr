@@ -2,6 +2,17 @@ OUTPUT_FORMAT("elf32-h8300")
 OUTPUT_ARCH(h8300h)
 ENTRY("_start")
 
+MEMORY
+{
+    romall(rx)   : o = 0x000000, l = 0x080000 /* ROM All Size is 512KB */
+    vectors(r)   : o = 0x000000, l = 0x000100 /* top of ROM 256 byte */
+    rom(rx)      : o = 0x000100, l = 0x07ff00 /* rest of ROM */
+
+    romall(rwx)  : o = 0xffbf20, l = 0x004000 /* RAM All Size is 16KB */
+    data(rwx)    : o = 0xfffc20, l = 0x000300
+    stack(rw)    : o = 0xffff00, l = 0x000000 /* end of RAM */
+}
+
 SECTIONS
 {
     . = 0x0;
