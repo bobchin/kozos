@@ -15,29 +15,43 @@ MEMORY
 
 SECTIONS
 {
-    . = 0x0;
-
     .vectors : {
         vector.o(.data)
-    }
+    } > vectors
 
     .text : {
+        _text_start = . ;
         *(.text)
-    }
+        _e_test = . ;
+    } > rom
 
     .rodata : {
+        _rodata_start = . ;
         *(.strings)
         *(.rodata)
         *(.rodata.*)
-    }
+        _erodata = . ;
+    } > rom
 
     .data : {
+        _data_start = . ;
         *(.data)
-    }
+        _edata = . ;
+    } > data AT> rom
 
     .bss : {
+        _bss_start = . ;
         *(.bss)
         *(COMMON)
-    }
+        _ebss = . ;
+    } > data AT> rom
+
+    . = ALIGN(4);
+    _end = . ;
+
+    .stack : {
+        _stack = . ;
+    } > stack
+
 }
 
