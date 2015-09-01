@@ -2,19 +2,6 @@
 #include "serial.h"
 #include "lib.h"
 
-int global_data = 0x10;
-int global_bss;
-static int static_data = 0x20;
-static int static_bss;
-
-static void printval(void)
-{
-    puts("global_data = "); putxval(global_data, 0); puts("\n");
-    puts("global_bss  = "); putxval(global_bss,  0); puts("\n");
-    puts("static_data = "); putxval(static_data, 0); puts("\n");
-    puts("static_bss  = "); putxval(static_bss,  0); puts("\n");
-}
-
 static int init(void)
 {
     /* can use the symbol defined at "ld.scr"    */
@@ -28,6 +15,19 @@ static int init(void)
     serial_init(SERIAL_DEFAULT_DEVICE);
 
     return 0;
+}
+
+int global_data = 0x10;
+int global_bss;
+static int static_data = 0x20;
+static int static_bss;
+
+static void printval(void)
+{
+    puts("global_data = "); putxval(global_data, 0); puts("\n");
+    puts("global_bss  = "); putxval(global_bss,  0); puts("\n");
+    puts("static_data = "); putxval(static_data, 0); puts("\n");
+    puts("static_bss  = "); putxval(static_bss,  0); puts("\n");
 }
 
 int main(void)
