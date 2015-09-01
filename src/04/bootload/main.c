@@ -28,7 +28,7 @@ static int dump(char *buf, long size)
   }
   for (i = 0; i < size; i++) {
     putxval(buf[i], 2);
-    if ((i & 0xf) == 15)) {
+    if ((i & 0xf) == 15) {
       puts("\n");
     } else {
       if ((i & 0xf) == 7) {
