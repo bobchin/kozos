@@ -17,6 +17,8 @@ H8WRITE = ../../tools/kz_h8write/kz_h8write
 
 H8WRITE_SERDEV = /dev/ttyUSB0
 
+H8XMODEM = ../../tools/kz_xmodem/kz_xmodem
+
 OBJS  = vector.o startup.o main.o
 OBJS += lib.o serial.o xmodem.o
 
@@ -52,6 +54,9 @@ image :		$(TARGET).mot
 
 write :		$(TARGET).mot
 		$(H8WRITE) $(TARGET).mot $(H8WRITE_SERDEV)
+
+send :
+		$(H8XMODEM) $(TARGET).elf $(H8WRITE_SERDEV)
 
 clean :
 		rm -f $(OBJS) $(TARGET) $(TARGET).elf $(TARGET).mot
