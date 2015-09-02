@@ -1,4 +1,4 @@
-#include "define.h"
+#include "defines.h"
 #include "elf.h"
 #include "lib.h"
 
@@ -25,7 +25,7 @@ struct elf_header {
   short section_header_size;
   short section_header_num;
   short section_name_index;
-}
+};
 
 struct elf_program_header {
   long type;
@@ -36,11 +36,11 @@ struct elf_program_header {
   long memory_size;
   long flags;
   long align;
-}
+};
 
 static int elf_check(struct elf_header *header)
 {
-  if (memcmp(header->id.magic, "\x7f", "ELF", 4))
+  if (memcmp(header->id.magic, "\x7f" "ELF", 4))
     return -1;
 
   if (header->id.class != 1)   return -1; /* ELF32 */
