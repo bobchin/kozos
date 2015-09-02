@@ -20,7 +20,7 @@ struct h8_3069f_sci {
 #define H8_3069F_SCI_SMR_CKS_PER1   (0<<0)
 #define H8_3069F_SCI_SMR_CKS_PER4   (1<<0)
 #define H8_3069F_SCI_SMR_CKS_PER16  (2<<0)
-#define H8_3069F_SCI_SMR_CKS_PER32  (3<<0)
+#define H8_3069F_SCI_SMR_CKS_PER64  (3<<0)
 #define H8_3069F_SCI_SMR_MP         (1<<2)
 #define H8_3069F_SCI_SMR_STOP       (1<<3)
 #define H8_3069F_SCI_SMR_OE         (1<<4)
