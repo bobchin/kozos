@@ -51,7 +51,7 @@ $(TARGET).mot :		$(TARGET)
 image :		$(TARGET).mot
 
 write :		$(TARGET).mot
-		$(H8WRITE) $(TARGET).mot 20 $(H8WRITE_SERDEV)
+		$(H8WRITE) $(TARGET).mot $(H8WRITE_SERDEV)
 
 clean :
 		rm -f $(OBJS) $(TARGET) $(TARGET).elf $(TARGET).mot
