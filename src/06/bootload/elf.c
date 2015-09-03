@@ -82,5 +82,5 @@ char *elf_load(char *buf)
   if (elf_check(header) < 0) return NULL;
   if (elf_load_program(header) < 0) return NULL;
 
-  return (char *)header->entry_point);
+  return (char *)header->entry_point;
 }
