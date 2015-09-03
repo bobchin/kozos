@@ -25,6 +25,10 @@ CFLAGS += -DKOZOS
 
 LFLAGS = -static -T ld.scr -L.
 
+H8WRITE_SERDEV = /dev/ttyUSB0
+
+H8XMODEM = ../../tools/kz_xmodem/kz_xmodem
+
 .SUFFIXES: .c .o
 .SUFFIXES: .s .o
 
@@ -40,6 +44,9 @@ $(TARGET) :		$(OBJS)
 
 .s.o :		$<
 		$(CC) -c $(CFLAGS) $<
+
+send :
+		$(H8XMODEM) $(TARGET) $(H8WRITE_SERDEV)
 
 clean :
 		rm -f $(OBJS) $(TARGET) $(TARGET).elf
