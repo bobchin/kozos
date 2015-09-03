@@ -75,12 +75,12 @@ static int elf_load_program(struct elf_header *header)
   return 0;
 }
 
-int elf_load(char *buf)
+char *elf_load(char *buf)
 {
   struct elf_header *header = (struct elf_header *)buf;
 
-  if (elf_check(header) < 0) return -1;
-  if (elf_load_program(header) < 0) return -1;
+  if (elf_check(header) < 0) return NULL;
+  if (elf_load_program(header) < 0) return NULL;
 
-  return 0;
+  return (char *)header->entry_point);
 }
