@@ -2,7 +2,7 @@
 #define _INTERRUPT_H_INCLUDED_
 
 extern char softvec;
-#define SOFTVEC_ADDR(&softvec)
+#define SOFTVEC_ADDR (&softvec)
 
 /* ソフトウェア割り込みベクタの種類 */
 typedef short softvec_type_t;
