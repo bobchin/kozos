@@ -1,0 +1,173 @@
+ELF ヘッダ:
+  マジック:   7f 45 4c 46 01 02 01 00 00 00 00 00 00 00 00 00
+  クラス:                            ELF32
+  データ:                            2 の補数、ビッグエンディアン
+  バージョン:                        1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI バージョン:                    0
+  型:                                EXEC (実行可能ファイル)
+  マシン:                            Renesas H8/300
+  バージョン:                        0x1
+  エントリポイントアドレス:               0x100
+  プログラムの開始ヘッダ:          52 (バイト)
+  セクションヘッダ始点:          2264 (バイト)
+  フラグ:                            0x810000
+  このヘッダのサイズ:                52 (バイト)
+  プログラムヘッダサイズ:            32 (バイト)
+  プログラムヘッダ数:                3
+  セクションヘッダ:                  40 (バイト)
+  セクションヘッダサイズ:            9
+  セクションヘッダ文字列表索引:      6
+
+セクションヘッダ:
+  [番] 名前              タイプ          アドレス Off    サイズ ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] .vectors          PROGBITS        00000000 000094 000100 00  WA  0   0  4
+  [ 2] .text             PROGBITS        00000100 000194 00065a 00  AX  0   0  2
+  [ 3] .rodata           PROGBITS        0000075a 0007ee 000098 01 AMS  0   0  1
+  [ 4] .data             PROGBITS        00fffc20 000888 000010 00  WA  0   0  4
+  [ 5] .bss              NOBITS          00fffc30 000898 000014 00  WA  0   0  4
+  [ 6] .shstrtab         STRTAB          00000000 000898 00003d 00      0   0  1
+  [ 7] .symtab           SYMTAB          00000000 000a40 000700 10      8  80  4
+  [ 8] .strtab           STRTAB          00000000 001140 000290 00      0   0  1
+フラグのキー:
+  W (write), A (alloc), X (実行), M (merge), S (文字列)
+  I (情報), L (リンク順), G (グループ), T (TLS), E (排他), x (不明)
+  O (追加の OS 処理が必要) o (OS 固有), p (プロセッサ固有)
+
+このファイルにはセクショングループがありません。
+
+プログラムヘッダ:
+  タイプ       オフセット 仮想Addr   物理Addr   FileSiz MemSiz  Flg Align
+  LOAD           0x000094 0x00000000 0x00000000 0x00100 0x00100 RW  0x1
+  LOAD           0x000194 0x00000100 0x00000100 0x006f2 0x006f2 R E 0x1
+  LOAD           0x000888 0x00fffc20 0x000007f2 0x00010 0x00024 RW  0x1
+
+ セグメントマッピングへのセクション:
+  セグメントセクション...
+   00     .vectors
+   01     .text .rodata
+   02     .data .bss
+
+このファイルには動的セクションがありません。
+
+このファイルには再配置されるものがありません。
+
+The decoding of unwind sections for machine type Renesas H8/300 is not currently supported.
+
+シンボルテーブル '.symtab' は 112 個のエントリから構成されています:
+   番号:      値 サイズ タイプ  Bind   Vis      索引名
+     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND
+     1: 00000000     0 SECTION LOCAL  DEFAULT    1
+     2: 00000100     0 SECTION LOCAL  DEFAULT    2
+     3: 0000075a     0 SECTION LOCAL  DEFAULT    3
+     4: 00fffc20     0 SECTION LOCAL  DEFAULT    4
+     5: 00fffc30     0 SECTION LOCAL  DEFAULT    5
+     6: 00000000     0 FILE    LOCAL  DEFAULT  ABS vector.c
+     7: 0000010a     0 NOTYPE  LOCAL  DEFAULT    2 .L1^B1
+     8: 00000000     0 FILE    LOCAL  DEFAULT  ABS main.c
+     9: 00fffc30    16 OBJECT  LOCAL  DEFAULT    5 buf___0
+    10: 00fffc20     4 OBJECT  LOCAL  DEFAULT    4 size___1
+    11: 00fffc40     4 OBJECT  LOCAL  DEFAULT    5 loadbuf___2
+    12: 000001e8     0 NOTYPE  LOCAL  DEFAULT    2 .L5
+    13: 000001cc     0 NOTYPE  LOCAL  DEFAULT    2 .L26
+    14: 000001ae     0 NOTYPE  LOCAL  DEFAULT    2 .L33
+    15: 000001de     0 NOTYPE  LOCAL  DEFAULT    2 .L11
+    16: 00000160     0 NOTYPE  LOCAL  DEFAULT    2 .L36
+    17: 0000029a     0 NOTYPE  LOCAL  DEFAULT    2 .L14
+    18: 00000242     0 NOTYPE  LOCAL  DEFAULT    2 .L15
+    19: 00000290     0 NOTYPE  LOCAL  DEFAULT    2 .L28
+    20: 00000272     0 NOTYPE  LOCAL  DEFAULT    2 .L20
+    21: 00000288     0 NOTYPE  LOCAL  DEFAULT    2 .L35
+    22: 00000282     0 NOTYPE  LOCAL  DEFAULT    2 .L22
+    23: 00000244     0 NOTYPE  LOCAL  DEFAULT    2 .L34
+    24: 00000000     0 FILE    LOCAL  DEFAULT  ABS lib.c
+    25: 000002b8     0 NOTYPE  LOCAL  DEFAULT    2 .L7
+    26: 000002ac     0 NOTYPE  LOCAL  DEFAULT    2 .L8
+    27: 000002da     0 NOTYPE  LOCAL  DEFAULT    2 .L15
+    28: 000002cc     0 NOTYPE  LOCAL  DEFAULT    2 .L16
+    29: 00000314     0 NOTYPE  LOCAL  DEFAULT    2 .L26
+    30: 0000030c     0 NOTYPE  LOCAL  DEFAULT    2 .L21
+    31: 00000306     0 NOTYPE  LOCAL  DEFAULT    2 .L22
+    32: 00000316     0 NOTYPE  LOCAL  DEFAULT    2 .L17
+    33: 000002f2     0 NOTYPE  LOCAL  DEFAULT    2 .L27
+    34: 00000332     0 NOTYPE  LOCAL  DEFAULT    2 .L34
+    35: 00000328     0 NOTYPE  LOCAL  DEFAULT    2 .L35
+    36: 00000350     0 NOTYPE  LOCAL  DEFAULT    2 .L38
+    37: 00000342     0 NOTYPE  LOCAL  DEFAULT    2 .L37
+    38: 00000366     0 NOTYPE  LOCAL  DEFAULT    2 .L53
+    39: 00000382     0 NOTYPE  LOCAL  DEFAULT    2 .L50
+    40: 0000037c     0 NOTYPE  LOCAL  DEFAULT    2 .L45
+    41: 00000376     0 NOTYPE  LOCAL  DEFAULT    2 .L46
+    42: 00000384     0 NOTYPE  LOCAL  DEFAULT    2 .L41
+    43: 0000035e     0 NOTYPE  LOCAL  DEFAULT    2 .L55
+    44: 000003b4     0 NOTYPE  LOCAL  DEFAULT    2 .L57
+    45: 000003ae     0 NOTYPE  LOCAL  DEFAULT    2 .L60
+    46: 000003a8     0 NOTYPE  LOCAL  DEFAULT    2 .L61
+    47: 000003c2     0 NOTYPE  LOCAL  DEFAULT    2 .L56
+    48: 000003bc     0 NOTYPE  LOCAL  DEFAULT    2 .L59
+    49: 000003c0     0 NOTYPE  LOCAL  DEFAULT    2 .L58
+    50: 0000039a     0 NOTYPE  LOCAL  DEFAULT    2 .L63
+    51: 000003e6     0 NOTYPE  LOCAL  DEFAULT    2 .L65
+    52: 00000414     0 NOTYPE  LOCAL  DEFAULT    2 .L67
+    53: 00000416     0 NOTYPE  LOCAL  DEFAULT    2 .L68
+    54: 00000442     0 NOTYPE  LOCAL  DEFAULT    2 .L74
+    55: 00000436     0 NOTYPE  LOCAL  DEFAULT    2 .L75
+    56: 0000046a     0 NOTYPE  LOCAL  DEFAULT    2 .L80
+    57: 00000460     0 NOTYPE  LOCAL  DEFAULT    2 .L77
+    58: 000004a8     0 NOTYPE  LOCAL  DEFAULT    2 .L83
+    59: 000004aa     0 NOTYPE  LOCAL  DEFAULT    2 .L82
+    60: 000004b2     0 NOTYPE  LOCAL  DEFAULT    2 .L93
+    61: 000004dc     0 NOTYPE  LOCAL  DEFAULT    2 .L90
+    62: 000004d6     0 NOTYPE  LOCAL  DEFAULT    2 .L84
+    63: 000004ae     0 NOTYPE  LOCAL  DEFAULT    2 .L94
+    64: 00000000     0 FILE    LOCAL  DEFAULT  ABS serial.c
+    65: 00fffc24    12 OBJECT  LOCAL  DEFAULT    4 _regs
+    66: 00000574     0 NOTYPE  LOCAL  DEFAULT    2 .L4
+    67: 000005e8     0 NOTYPE  LOCAL  DEFAULT    2 .L8
+    68: 00000000     0 FILE    LOCAL  DEFAULT  ABS xmodem.c
+    69: 0000066a     0 NOTYPE  LOCAL  DEFAULT    2 .L4
+    70: 0000065e     0 NOTYPE  LOCAL  DEFAULT    2 .L40
+    71: 00000648     0 NOTYPE  LOCAL  DEFAULT    2 .L8
+    72: 00000736     0 NOTYPE  LOCAL  DEFAULT    2 .L27
+    73: 00000730     0 NOTYPE  LOCAL  DEFAULT    2 .L38
+    74: 00000728     0 NOTYPE  LOCAL  DEFAULT    2 .L14
+    75: 0000071a     0 NOTYPE  LOCAL  DEFAULT    2 .L30
+    76: 000006c0     0 NOTYPE  LOCAL  DEFAULT    2 .L21
+    77: 0000071c     0 NOTYPE  LOCAL  DEFAULT    2 .L37
+    78: 0000063e     0 NOTYPE  LOCAL  DEFAULT    2 .L39
+    79: 00000746     0 NOTYPE  LOCAL  DEFAULT    2 .L1
+    80: 00000358    50 NOTYPE  GLOBAL DEFAULT    2 _strcmp
+    81: 00000000   256 OBJECT  GLOBAL DEFAULT    1 _vectors
+    82: 000003cc    46 NOTYPE  GLOBAL DEFAULT    2 _putc
+    83: 000003fa    48 NOTYPE  GLOBAL DEFAULT    2 _getc
+    84: 0000042a    36 NOTYPE  GLOBAL DEFAULT    2 _puts
+    85: 00fffc30     0 NOTYPE  GLOBAL DEFAULT    5 _bss_start
+    86: 00000100     0 NOTYPE  GLOBAL DEFAULT    2 _text_start
+    87: 00000528    36 NOTYPE  GLOBAL DEFAULT    2 _serial_is_send_enable
+    88: 0000075a     0 NOTYPE  GLOBAL DEFAULT    2 _etest
+    89: 000005c6    74 NOTYPE  GLOBAL DEFAULT    2 _serial_recv_byte
+    90: 0000044e    58 NOTYPE  GLOBAL DEFAULT    2 _gets
+    91: 00fffc44     0 NOTYPE  GLOBAL DEFAULT    5 _ebss
+    92: 000002be    40 NOTYPE  GLOBAL DEFAULT    2 _memcpy
+    93: 000002a4    26 NOTYPE  GLOBAL DEFAULT    2 _memset
+    94: 00000100     0 FUNC    GLOBAL DEFAULT    2 _start
+    95: 00fffc20     0 NOTYPE  GLOBAL DEFAULT    4 _data_start
+    96: 000004f2    54 NOTYPE  GLOBAL DEFAULT    2 _serial_init
+    97: 00000488   106 NOTYPE  GLOBAL DEFAULT    2 _putxval
+    98: 0000033a    30 NOTYPE  GLOBAL DEFAULT    2 _strcpy
+    99: 00ffdf20     0 NOTYPE  GLOBAL DEFAULT    4 _buffer_start
+   100: 000002e6    58 NOTYPE  GLOBAL DEFAULT    2 _memcmp
+   101: 0000038a    66 NOTYPE  GLOBAL DEFAULT    2 _strncmp
+   102: 0000075a     0 NOTYPE  GLOBAL DEFAULT    3 _rodata_start
+   103: 00fffc30     0 NOTYPE  GLOBAL DEFAULT    4 _edata
+   104: 00fffc44     0 NOTYPE  GLOBAL DEFAULT  ABS _end
+   105: 000005a2    36 NOTYPE  GLOBAL DEFAULT    2 _serial_is_recv_enable
+   106: 00000320    26 NOTYPE  GLOBAL DEFAULT    2 _strlen
+   107: 00000610   330 NOTYPE  GLOBAL DEFAULT    2 _xmodem_recv
+   108: 0000054c    86 NOTYPE  GLOBAL DEFAULT    2 _serial_send_byte
+   109: 00ffff00     0 NOTYPE  GLOBAL DEFAULT    5 _stack
+   110: 0000010c   408 NOTYPE  GLOBAL DEFAULT    2 _main
+   111: 000007f2     0 NOTYPE  GLOBAL DEFAULT    3 _erodata
+
+このファイルからはバージョン情報が見つかりません。
