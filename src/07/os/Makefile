@@ -13,7 +13,7 @@ OBJDUMP = $(BINDIR)/$(ADDNAME)objdump
 RANLIB  = $(BINDIR)/$(ADDNAME)ranlib
 STRIP   = $(BINDIR)/$(ADDNAME)strip
 
-OBJS  = startup.o main.o
+OBJS  = startup.o main.o interrupt.o
 OBJS += lib.o serial.o
 
 TARGET = kozos
@@ -31,6 +31,7 @@ H8XMODEM = ../../tools/kz_xmodem/kz_xmodem
 
 .SUFFIXES: .c .o
 .SUFFIXES: .s .o
+.SUFFIXES: .S .o
 
 all :		$(TARGET)
 
@@ -43,6 +44,9 @@ $(TARGET) :		$(OBJS)
 		$(CC) -c $(CFLAGS) $<
 
 .s.o :		$<
+		$(CC) -c $(CFLAGS) $<
+
+.S.o :		$<
 		$(CC) -c $(CFLAGS) $<
 
 send :
