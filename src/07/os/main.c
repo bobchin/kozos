@@ -17,6 +17,7 @@ static void intr(softvec_type_t type, unsigned long sp)
   } else {
     buf[len++] = '\0';
     if (!strncmp(buf, "echo", 4)) {
+      puts(buf + 4);
       puts("\n");
     } else {
       puts("unknown.\n");
