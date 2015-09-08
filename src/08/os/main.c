@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "intr.h"
+#include "kozos.h"
 #include "interrupt.h"
 #include "lib.h"
 

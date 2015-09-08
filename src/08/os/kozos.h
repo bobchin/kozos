@@ -9,7 +9,7 @@
 /*******************************/
 
 /* システムコール */
-kz_thread_id_t kz_run(kz_func func, char *name, int stacksize, int argc, char *argv[]);
+kz_thread_id_t kz_run(kz_func_t func, char *name, int stacksize, int argc, char *argv[]);
 
 void kz_exit(void);
 

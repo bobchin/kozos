@@ -36,7 +36,7 @@ typedef struct _kz_thread {
   char name[THREAD_NAME_SIZE + 1];
   char *stack;
 
-　/* スレッド起動時のパラメータ */
+   /* スレッド起動時のパラメータ */
   struct {
     kz_func_t func;
     int argc;
