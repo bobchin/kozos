@@ -2,6 +2,7 @@
 #include "kozos.h"
 #include "syscall.h"
 
+/* システムコール(RUN)の発行 */
 kz_thread_id_t kz_run(kz_func_t func, char *name, int stacksize, int argc, char *argv[])
 {
   kz_syscall_param_t param;
@@ -15,6 +16,7 @@ kz_thread_id_t kz_run(kz_func_t func, char *name, int stacksize, int argc, char 
   return param.un.run.ret;
 }
 
+/* システムコール(EXIT)の発行 */
 void kz_exit(void)
 {
   kz_syscall(KZ_SYSCALL_TYPE_EXIT, NULL);

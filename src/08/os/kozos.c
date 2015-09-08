@@ -115,7 +115,15 @@ static void thread_init(kz_thread *thp)
   thread_end();
 }
 
-/* システムコールの処理（kz_run():スレッドの起動） */
+/*
+ * システムコールの処理（kz_run():スレッドの起動）
+ *
+ * ユーザスタックに指定した関数を登録しておき、
+ * dispatch()を実行した時に、その関数が呼ばれるようにする。
+ *（実際はthread_init()で実行）
+ * 実行後はthread_end()が実行され、kz_exit()が実行される。
+ * スレッド実行されるようにレディキューに追加される。
+ */
 static kz_thread_id_t thread_run(kz_func_t func, char *name, int stacksize, int argc, char *argv[])
 {
   int i;
@@ -234,11 +242,13 @@ static void schedule(void)
   current = readyque.head;
 }
 
+/* システムコール割り込み呼び出し */
 static void syscall_intr(void)
 {
   syscall_proc(current->syscall.type, current->syscall.param);
 }
 
+/* ソフトウェアエラー割り込みの呼び出し */
 static void softerr_intr(void)
 {
   puts(current->name);
@@ -247,20 +257,38 @@ static void softerr_intr(void)
   thread_exit();
 }
 
+/*
+ * 割り込み処理の入り口関数
+ *
+ * ソフトウェア割り込みを一括で処理するハンドラ
+ * 実際に実行する処理はhandlersに格納しておく
+ */
 static void thread_intr(softvec_type_t type, unsigned long sp)
 {
+  /* カレントスレッドのコンテキストを保存する */
   current->context.sp = sp;
 
+  /*
+   * 割り込みごとの処理を実行する
+   * SOFTVEC_TYPE_SYSCALL => syscall_intr()
+   * SOFTVEC_TYPE_SOFTERR => softerr_intr()
+   */
   if (handlers[type])
     handlers[type]();
 
+  /* スレッドのスケジューリング */
   schedule();
 
+  /*
+   * スレッドのディスパッチ
+   * start.sで定義
+   */
   dispatch(&current->context);
 
   /* ここには返ってこない */
 }
 
+/* 初期スレッドの起動 */
 void kz_start(kz_func_t func, char *name, int stacksize, int argc, char *argv[])
 {
   current = NULL;
@@ -272,13 +300,20 @@ void kz_start(kz_func_t func, char *name, int stacksize, int argc, char *argv[])
   setintr(SOFTVEC_TYPE_SYSCALL, syscall_intr);
   setintr(SOFTVEC_TYPE_SOFTERR, softerr_intr);
 
+  /*
+   * システムコール発行不可なので直接関数を呼び出してスレッド作成する
+   */
   current = (kz_thread *)thread_run(func, name, stacksize, argc, argv);
 
+  /*
+   * 渡されたスタックポインタをもとに実行される＝上で登録したcurrentが実行される
+   */
   dispatch(&current->context);
 
   /* ここには返ってこない */
 }
 
+/* OS内部で致命的なエラーが発生したときにこの関数を実行する */
 void kz_sysdown(void)
 {
   puts("system error!\n");
@@ -286,9 +321,15 @@ void kz_sysdown(void)
     ;
 }
 
+/* システムコール呼び出し用ライブラリ関数 */
 void kz_syscall(kz_syscall_type_t type, kz_syscall_param_t *param)
 {
   current->syscall.type  = type;
   current->syscall.param = param;
+
+  /*
+   * トラップ命令実行
+   * vector.cよりintr_syscallが発生
+   */
   asm volatile ("trapa #0");
 }

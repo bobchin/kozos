@@ -16,7 +16,9 @@ int main(void)
 
   puts("kozos boot succeed!\n");
 
+  /* OS の動作開始 */
   kz_start(start_threads, "start", 0x100, 0, NULL);
+  /* ここには戻ってこない */
 
   return 0;
 }
