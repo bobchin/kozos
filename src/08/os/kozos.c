@@ -5,31 +5,51 @@
 #include "syscall.h"
 #include "lib.h"
 
+/*******************************
+ * OS の本体
+ *  スレッドの管理
+ *  システムコールの受付
+ *  割り込み処理
+ *******************************/
+
 #define  THREAD_NUM 6
 #define  THREAD_NAME_SIZE 15
 
-/* スレッドコンテキスト */
+/*
+ * スレッドコンテキスト
+ *
+ * スレッドの実行・中断をするのに保存が必要なCPUの情報。
+ * 汎用レジスタはスタックに格納されるので
+ * スタックポインタのみ保持する
+ */
 typedef struct _kz_context {
   uint32 sp;
 } kz_context;
 
-/* タスクコントロールブロック */
+/*
+ * タスクコントロールブロック
+ *
+ * 各タスクの情報を格納する領域
+ */
 typedef struct _kz_thread {
   struct _kz_thread *next;
   char name[THREAD_NAME_SIZE + 1];
   char *stack;
 
+　/* スレッド起動時のパラメータ */
   struct {
     kz_func_t func;
     int argc;
     char **argv;
   } init;
 
+  /* システムコール呼び出し時のパラメータ */
   struct {
     kz_syscall_type_t type;
     kz_syscall_param_t *param;
   } syscall;
 
+  /* スレッドのコンテキスト情報の格納領域 */
   kz_context context;
 } kz_thread;
 
@@ -39,8 +59,13 @@ static struct {
   kz_thread *tail;
 } readyque;
 
+/* カレントスレッド */
 static kz_thread *current;
+
+/* タスクコントロールブロックのリスト */
 static kz_thread threads[THREAD_NUM];
+
+/* 割り込みハンドラのリスト */
 static kz_handler_t handlers[SOFTVEC_TYPE_NUM];
 
 void dispatch(kz_context *context);

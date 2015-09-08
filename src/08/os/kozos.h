@@ -4,6 +4,10 @@
 #include "defines.h"
 #include "syscall.h"
 
+/*******************************/
+/* OS のサービスを提供           */
+/*******************************/
+
 /* システムコール */
 kz_thread_id_t kz_run(kz_func func, char *name, int stacksize, int argc, char *argv[]);
 
