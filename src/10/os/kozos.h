@@ -26,6 +26,6 @@ void kz_sysdown(void);
 void kz_syscall(kz_syscall_type_t type, kz_syscall_param_t *param);
 
 /* ユーザスレッド */
-int test010_1_main(int argc, char *argv[]);
+int test10_1_main(int argc, char *argv[]);
 
 #endif

@@ -252,7 +252,7 @@ static int thread_wakeup(kz_thread_id_t id)
 static kz_thread_id_t thread_getid(void)
 {
   putcurrent();
-  return (kz_thread_id_t) current;
+  return (kz_thread_id_t)current;
 }
 
 /* システムコールの処理(kz_chpri(): スレッドの優先度の変更) */
