@@ -281,13 +281,41 @@ static int setintr(softvec_type_t type, kz_handler_t handler)
 static void call_functions(kz_syscall_type_t type, kz_syscall_param_t *p)
 {
   switch (type) {
-    case KZ_SYSCALL_TYPE_RUN: /* kz_run() */
-      p->un.run.ret = thread_run(p->un.run.func, p->un.run.name, p->un.run.stacksize,
+    /* kz_run() */
+    case KZ_SYSCALL_TYPE_RUN:
+      p->un.run.ret = thread_run(p->un.run.func, p->un.run.name,
+                                 p->un.run.priority, p->un.run.stacksize,
                                  p->un.run.argc, p->un.run.argv);
       break;
 
-    case KZ_SYSCALL_TYPE_EXIT: /* kz_exit() */
+    /* kz_exit() */
+    case KZ_SYSCALL_TYPE_EXIT:
       thread_exit();
+      break;
+
+    /* kz_wait() */
+    case KZ_SYSCALL_TYPE_WAIT:
+      p->un.wait.ret = thread_wait();
+      break;
+
+    /* kz_sleep() */
+    case KZ_SYSCALL_TYPE_SLEEP:
+      p->un.sleep.ret = thread_sleep();
+      break;
+
+    /* kz_wakeup() */
+    case KZ_SYSCALL_TYPE_WAKEUP:
+      p->un.wakeup.ret = thread_wakeup(p->un.wakeup.id);
+      break;
+
+    /* kz_getid() */
+    case KZ_SYSCALL_TYPE_GETID:
+      p->un.getid.ret = thread_getid();
+      break;
+
+    /* kz_chpri() */
+    case KZ_SYSCALL_TYPE_CHPRI:
+      p->un.chpri.ret = thread_chpri(p->un.chpri.priority);
       break;
 
     default:
@@ -305,10 +333,22 @@ static void syscall_proc(kz_syscall_type_t type, kz_syscall_param_t *p)
 /* スレッドのスケジューリング */
 static void schedule(void)
 {
-  if (!readyque.head)
+  int i;
+
+  /*
+   * 優先度の高い順（優先度の数値の小さい順）にレディキューをみて
+   * 動作可能なスレッドを検索する
+   */
+  for (size_t i = 0; i < PRIORITY_NUM; i++) {
+    if (readyque[i].head)
+      break;
+  }
+
+  /* 見つからなかった */
+  if (i == PRIORITY_NUM)
     kz_sysdown();
 
-  current = readyque.head;
+  current = readyque[i].head;
 }
 
 /* システムコール割り込み呼び出し */
