@@ -3,6 +3,7 @@
 #include "intr.h"
 #include "interrupt.h"
 #include "syscall.h"
+#include "memory.h"
 #include "lib.h"
 
 /*******************************
@@ -266,6 +267,21 @@ static int thread_chpri(int priority)
   return old;
 }
 
+/* システムコールの処理(kz_kmalloc(): 動的メモリ獲得) */
+static void *thread_kmalloc(int size)
+{
+  putcurrent();
+  return kzmem_alloc(size);
+}
+
+/* システムコールの処理(kz_kmfree(): メモリ解放) */
+static int thread_kmfree(char *p)
+{
+  kzmem_free(p);
+  putcurrent();
+  return 0;
+}
+
 /* 割り込みハンドラの登録 */
 static int setintr(softvec_type_t type, kz_handler_t handler)
 {
@@ -316,6 +332,16 @@ static void call_functions(kz_syscall_type_t type, kz_syscall_param_t *p)
     /* kz_chpri() */
     case KZ_SYSCALL_TYPE_CHPRI:
       p->un.chpri.ret = thread_chpri(p->un.chpri.priority);
+      break;
+
+    /* kz_kmalloc() */
+    case KZ_SYSCALL_TYPE_KMALLOC:
+      p->un.kmalloc.ret = thread_kmalloc(p->un.kmalloc.size);
+      break;
+
+    /* kz_kmfree() */
+    case KZ_SYSCALL_TYPE_KMFREE:
+      p->un.kmfree.ret = thread_chpri(p->un.kmfree.p);
       break;
 
     default:
@@ -400,6 +426,13 @@ static void thread_intr(softvec_type_t type, unsigned long sp)
 /* 初期スレッドの起動 */
 void kz_start(kz_func_t func, char *name, int priority, int stacksize, int argc, char *argv[])
 {
+  /* 動的メモリの初期化 */
+  kzmem_init();
+
+  /*
+   * 以降で呼び出すスレッド関連のライブラリ関数の内部で
+   * current を見ている場合があるので、currentをNULLに初期化しておく
+   */
   current = NULL;
 
   memset(readyque, 0, sizeof(readyque));
