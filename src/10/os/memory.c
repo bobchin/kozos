@@ -30,7 +30,7 @@ static kzmem_pool pool[] = {
   {16, 8, NULL},
   {32, 8, NULL},
   {64, 4, NULL},
-}
+};
 
 #define MEMORY_AREA_NUM (sizeof(pool) / sizeof(*pool))
 
@@ -114,7 +114,7 @@ void kzmem_free(void *mem)
   kzmem_pool *p;
 
   /* 領域の直前にある（はずの）メモリブロック構造体を取得 */
-  mp = ((kzmem_block)mem - 1);
+  mp = ((kzmem_block *)mem - 1);
 
   for (i = 0; i < MEMORY_AREA_NUM; i++) {
     p = &pool[i];
