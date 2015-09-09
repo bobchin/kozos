@@ -398,11 +398,11 @@ static void thread_intr(softvec_type_t type, unsigned long sp)
 }
 
 /* 初期スレッドの起動 */
-void kz_start(kz_func_t func, char *name, int stacksize, int argc, char *argv[])
+void kz_start(kz_func_t func, char *name, int priority, int stacksize, int argc, char *argv[])
 {
   current = NULL;
 
-  readyque.head = readyque.tail = NULL;
+  memset(readyque, 0, sizeof(readyque));
   memset(threads, 0, sizeof(threads));
   memset(handlers, 0, sizeof(handlers));
 
@@ -412,7 +412,7 @@ void kz_start(kz_func_t func, char *name, int stacksize, int argc, char *argv[])
   /*
    * システムコール発行不可なので直接関数を呼び出してスレッド作成する
    */
-  current = (kz_thread *)thread_run(func, name, stacksize, argc, argv);
+  current = (kz_thread *)thread_run(func, name, priority, stacksize, argc, argv);
 
   /*
    * 渡されたスタックポインタをもとに実行される＝上で登録したcurrentが実行される
