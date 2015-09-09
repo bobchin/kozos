@@ -255,7 +255,7 @@ static kz_thread_id_t thread_getid(void)
 }
 
 /* システムコールの処理(kz_chpri(): スレッドの優先度の変更) */
-static int thread_chpri(void)
+static int thread_chpri(int priority)
 {
   int old = current->priority;
   if (priority >= 0)
@@ -339,7 +339,7 @@ static void schedule(void)
    * 優先度の高い順（優先度の数値の小さい順）にレディキューをみて
    * 動作可能なスレッドを検索する
    */
-  for (size_t i = 0; i < PRIORITY_NUM; i++) {
+  for (i = 0; i < PRIORITY_NUM; i++) {
     if (readyque[i].head)
       break;
   }
