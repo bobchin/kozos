@@ -9,11 +9,11 @@ int test10_1_main(int argc, char *argv[])
 
   puts("test10_1 started.\n");
 
-  for (i = 4; i < 56; i += 4) {
+  for (i = 4; i <= 56; i += 4) {
     /* メモリを動的に取得 */
     p1 = kz_kmalloc(i);
     p2 = kz_kmalloc(i);
-    for (j = 0; j < i -1; j++) {
+    for (j = 0; j < i - 1; j++) {
       p1[j] = 'a';
       p2[j] = 'b';
     }
