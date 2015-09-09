@@ -341,7 +341,7 @@ static void call_functions(kz_syscall_type_t type, kz_syscall_param_t *p)
 
     /* kz_kmfree() */
     case KZ_SYSCALL_TYPE_KMFREE:
-      p->un.kmfree.ret = thread_chpri(p->un.kmfree.p);
+      p->un.kmfree.ret = thread_kmfree(p->un.kmfree.p);
       break;
 
     default:
