@@ -235,7 +235,7 @@ static int thread_sleep(void)
 }
 
 /* システムコールの処理(kz_wakeup(): スレッドのウェイクアップ) */
-static int thread_wakeup(void)
+static int thread_wakeup(kz_thread_id_t id)
 {
   /* ウェイクアップを呼び出したスレッドをレディキューに戻す */
   putcurrent();
