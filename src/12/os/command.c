@@ -44,7 +44,7 @@ int command_main(int argc, char *argv[])
 
     if (!strncmp(p, "echo", 4)) {
       send_write(p + 4);
-      send_write("\n")
+      send_write("\n");
     } else {
       send_write("unknown.\n");
     }
