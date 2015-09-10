@@ -348,7 +348,7 @@ static void recvmsg(kz_msgbox *mboxp)
   mp = mboxp->head;
   mboxp->head = mp->next;
   if (mboxp->head == NULL)
-    mboxp->tail == NULL;
+    mboxp->tail = NULL;
   mp->next = NULL;
 
   /* メッセージを受信するスレッドに返す値を設定する */
